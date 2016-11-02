@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'starterCtrl'])
+angular.module('starter', ['ionic', 'starterCtrl', 'officeBookingService'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -33,17 +33,51 @@ angular.module('starter', ['ionic', 'starterCtrl'])
         url: '/tabs',
         templateUrl: 'templates/tabs.html'
       })
-
+        
       .state('tabs.therapistLanding', {
         url: '/therapistLanding',
         cache: false,
         views: {
           'therapistLanding': {
             templateUrl: 'templates/therapistLanding.html',
-            // controller: 'therapistLandingCtrl'
+            controller: 'therapistLandingCtrl'
           }
-
+        }
+      })
+      
+        .state('tabs.bookOffice', {
+        url: '/bookOffice',
+        cache: false,
+        views: {
+          'therapistLanding': {
+            templateUrl: 'templates/bookOffice.html',
+            controller: 'bookOfficeCtrl'
+          }
+        }
+      })
+      
+      .state('tabs.confirmation', {
+        url: '/confirmation',
+        cache: false,
+        views: {
+          'therapistLanding': {
+            templateUrl: 'templates/confirmation.html',
+            controller: 'confirmationCtrl'
+          }
         }
       });
+    
+      // .state('bookOffice', {
+      //   // abstract:true,
+      //   url: '/bookOffice',
+      //   templateUrl: 'templates/bookOffice.html'
+      // })
+        
+      
+      
+      
+      
+      
+      
     }
   ]);

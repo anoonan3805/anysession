@@ -1,0 +1,53 @@
+<ion-view view-title="Book" hide-back-button="false">
+
+  <ion-nav-buttons side="left">
+    <!--Commented this out since we have working tabs AN-->
+    <!--<button class="button back-button buttons button-clear header-item" ng-click="goBack()">-->
+    <!--  <i class="icon ion-ios-arrow-back"> Back</i> -->
+    <!--</button>-->
+  </ion-nav-buttons>
+  <ion-content>
+    <form name="bookOffice" ng-submit="setBooking(bookOffice)" novalidate>
+      <div class="list list-inset">
+        <label class="item"> <b>Office Location</b><br> Any Session Headquarters, 2851 Camino del Rio South San Diego, CA 92108
+      </label>
+      </div>
+      <!--Input for selecting the appointment JP-->
+      <div class="list list-inset">
+        <label class="item item-input">
+      <i class="icon ion-calendar placeholder-icon"></i>
+        <input ng-model="bookingInfo.sessionInfo.date" type="date" placeholder="Date"></input>
+      </label><br>
+      </div>
+       <!--Select  the hour for appointment JP-->
+      <div class="list list-inset">
+        <label class="item item-input item-select">
+      <div class="input-label">
+        Hour
+    </div>
+    <select ng-model="bookingInfo.sessionInfo.reservationInfo.hour" >
+      <option ng-repeat="hour in hours" type="time" > {{hour.hour}}</option>
+    </select>
+    </label>
+      </div>
+   <!--Input for selecting the room JP-->
+      <div class="list list-inset">
+        <label class="item item-input item-select">
+      <div class="input-label">
+        Room
+      </div>
+      <select ng-model="bookingInfo.officeName">
+      <option ng-repeat= "office in officesArray" ng-value="office.officeName">{{office.officeName}}</option>
+      </select>
+      </label>
+      </div>
+      <br>
+       <!--Buttton to confirm reservation-->
+      <button class="button button-block button-balanced" ng-click="setBooking()">
+      Reserve
+    </button>
+    </form>
+    {{test}}
+  </ion-content>
+ 
+</ion-view>
