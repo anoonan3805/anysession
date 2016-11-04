@@ -12,6 +12,7 @@
         <label class="item"> <b>Office Location</b><br> Any Session Headquarters, 2851 Camino del Rio South San Diego, CA 92108
       </label>
       </div>
+      
       <!--Input for selecting the appointment JP-->
       <div class="list list-inset">
         <label class="item item-input">
@@ -19,18 +20,18 @@
         <input ng-model="testData.sessionDate" type="date" placeholder="Date"></input>
       </label><br>
       </div>
-       <!--Select  the hour for appointment JP-->
-    <!--  <div class="list list-inset">-->
-    <!--    <label class="item item-input item-select">-->
-    <!--  <div class="input-label">-->
-    <!--    Hour-->
-    <!--</div>-->
-    <!--<select ng-model="bookingInfo.sessionInfo.reservationInfo.hour" >-->
-    <!--  <option ng-repeat="hour in hours" type="time" > {{hour.hour}}</option>-->
-    <!--</select>-->
-    <!--</label>-->
-    <!--  </div>-->
-   <!--Input for selecting the room JP-->
+      <!--Select  the hour for appointment JP-->
+      <!--  <div class="list list-inset">-->
+      <!--    <label class="item item-input item-select">-->
+      <!--  <div class="input-label">-->
+      <!--    Hour-->
+      <!--</div>-->
+      <!--<select ng-model="bookingInfo.sessionInfo.reservationInfo.hour" >-->
+      <!--  <option ng-repeat="hour in hours" type="time" > {{hour.hour}}</option>-->
+      <!--</select>-->
+      <!--</label>-->
+      <!--  </div>-->
+      <!--Input for selecting the room JP-->
       <!--<div class="list list-inset">-->
       <!--  <label class="item item-input item-select">-->
       <!--<div class="input-label">-->
@@ -41,27 +42,48 @@
       <!--</select>-->
       <!--</label>-->
       <!--</div>-->
-      
-        <!--User to select different hours available-->
 
-      <button class="button button-small button-balanced"  ng-click="buttonTest()">Test Post
+      <!--User to select different hours available-->
+
+      <button class="button button-small button-balanced" ng-click="buttonTest()">Test Post
 </button>
-      <button class="button button-small button-balanced"  ng-click="retrieve()">Test Retrieve
-</button>
+
+<!---->
+<!--WE will use this to test dont delete yet-->
+<!--      <button class="button button-small button-balanced" ng-click="retrieve()">Test Retrieve-->
+<!--</button>-->
+<!---->
+
+<!--<ion-list ng-model="testData.sessionsRequested">-->
+
+<!--  <ion-checkbox ng-repeat="office in officesArray">{{office.timesAvailable.hour}}</ion-checkbox>-->
+  
+
+<!--</ion-list>-->
+
+<div class="card" ng-repeat= "office in officesArray"> <b>{{office.officeName}}</b><br>
+    
+ 
+  <center> <button class="button button-small button-outline button-balanced" type="time" ng-repeat="i in office.timesAvailable">
+        {{i}}:00
+</button></center>
+  
+  
+</div>
       
-      
-      <h3>{{officesArray.officeName}}</h3>
-      <button class="button button-small button-balanced" type="time" ng-value="testData.sessionsRequested" >{{officesArray.timesAvailable[0]}}:00
-</button>
+<!--      <button class="button button-small button-balanced" type="time" ng-value="testData.sessionsRequested" >-->
+<!--        {{office.timesAvailable}}-->
+<!--</button>-->
+<!--</div>-->
       <br>
-      
-     
-      
-       <!--Button to confirm reservation-->
-      <button class="button button-block button-balanced" ng-click="setBooking()"  >
+
+
+
+      <!--Button to confirm reservation-->
+      <button class="button button-block button-balanced" ng-click="setBooking()">
           Reserve
     </button>
     </form>
   </ion-content>
- 
+
 </ion-view>

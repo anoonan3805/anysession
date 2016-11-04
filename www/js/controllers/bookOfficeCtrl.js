@@ -3,9 +3,7 @@ angular.module('starterCtrl')
         function($scope, $window, $state, $ionicHistory, $rootScope,
             $http, officeBookingService, bookingRest) {
 
-            // $scope.bookingInfo={
-            //         somedata:"hey there"
-            //     };
+            
 
 
             officeBookingService.setbookingInfo($scope.bookingInfo);
@@ -24,28 +22,17 @@ angular.module('starterCtrl')
 
 
             //mock data needed for testing purposes -jp  
-            // $scope.officesArray = [{
-            //     officeName: "Room A",
-            //     buildingId: "4566",
-            //     timesAvailable: [8, 9, 10, 11, 12, 13, 14, 15, 16],
-            //     id: "8974"
-            // }, {
-            //     officeName: "Room B",
-            //     buildingId: "4545",
-            //     timesAvailable: [8, 9, 10, 11, 12, 13, 14, 15, 16],
-            //     id: "4454"
-            // }];
-
-
-            $scope.officesArray = {
+            $scope.officesArray = [{
                 officeName: "Room A",
                 buildingId: "4566",
-                timesAvailable: [8, 9, 10, 11, 12, 13, 14, 15, 16],
+                timesAvailable: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
                 id: "8974"
-
-            };
-
-            
+            }, {
+                officeName: "Room B",
+                buildingId: "4545",
+                timesAvailable: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+                id: "4454"
+            }];
 
 
 
@@ -57,7 +44,7 @@ angular.module('starterCtrl')
                 "userID": 1234
             };
             $scope.testData.sessionDate;
-            $scope.testData.sessionsRequested
+            $scope.testData.sessionsRequested;
 
             $scope.buttonTest = function() {
                 // bookingRest.post().then(function(res) {
@@ -68,7 +55,8 @@ angular.module('starterCtrl')
                 bookingRest.post($scope.testData).then(function(response) {
                     if (response.status === 200) {
                         
-                        alert("yes!");
+                        alert("yes! sent data check consolelog");
+                        console.log(response.data);
                     }else {
                         alert("It didnt work!");
                     }
