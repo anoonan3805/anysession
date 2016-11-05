@@ -3,74 +3,159 @@ angular.module('starterCtrl')
         function($scope, $window, $state, $ionicHistory, $rootScope,
             $http, officeBookingService, bookingRest) {
 
-            
 
 
-            officeBookingService.setbookingInfo($scope.bookingInfo);
+
+            $scope.buildingInfo = {};
+
+            bookingRest.getBuildingInfo().then(function(response) {
+                if (response.status === 200) {
+                    $scope.building = response.data;
+                    console.log($scope.building);
+                }
+            });
+
+            $scope.time = [];
+            $scope.timeOffice = [];
+            $scope.timeDisplay = [];
 
 
-            $scope.bookingInfo = {
+
+
+
+            $scope.getTimeSlots = {};
+
+            $scope.testData = {};
+
+            $scope.searchbutton = function() {
+                alert("Let the search begin!");
+                $scope.testData = {
+                    sessionDate: "11/05/2016"
+                };
+
+                bookingRest.getSessions($scope.testData.sessionDate).then(function(response) {
+                    console.log($scope.testData.sessionDate);
+
+                    if (response.status === 200) {
+                        //////This is the scope with the booked sessions
+                        $scope.bookedSessions = response.data;
+                        console.log(response.data);
+
+
+                        ///////////////
+
+                        bookingRest.getTimeSlots().then(function(resp) {
+                            if (resp.status === 200) {
+                                $scope.Office = resp.data;
+
+                                // $scope.Office.timesAvailable = response.data;
+                                console.log($scope.Office);
+
+                                console.log($scope.Office[0].timesAvailable);
+                                console.log($scope.bookedSessions[0].sessionsRequested);
+
+                                $scope.time.push($scope.bookedSessions[0].sessionsRequested);
+                                console.log($scope.time);
+
+                                $scope.timeOffice.push($scope.Office[0].timesAvailable);
+                                console.log($scope.timeOffice);
+
+
+
+
+                            }
+                        });
+                        //////////////////        
+                        for (var i = 0; i <= $scope.timeOffice.length; i++) {
+                            if ($scope.time == $scope.timeOffice) {
+                                alert("Yes!");
+                            }
+                        }
+
+
+                    }
+                    else {
+                        alert("It didnt work!");
+                    }
+
+
+
+                });
+
 
             };
-            $scope.bookingInfo.reservedby = "Jadon Parker";
-            $scope.bookingInfo.officeId;
-            $scope.bookingInfo.reservedfromDate;
-            $scope.bookingInfo.hour;
-            $scope.bookingInfo.officeName;
+
+
+
+            // officeBookingService.setbookingInfo($scope.bookingInfo);
+
+
+            // $scope.bookingInfo = {
+
+            // };
+            // $scope.bookingInfo.reservedby = "Jadon Parker";
+            // $scope.bookingInfo.officeId;
+            // $scope.bookingInfo.reservedfromDate;
+            // $scope.bookingInfo.hour;
+            // $scope.bookingInfo.officeName;
 
 
 
 
             //mock data needed for testing purposes -jp  
-            $scope.officesArray = [{
-                officeName: "Room A",
-                buildingId: "4566",
-                timesAvailable: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-                id: "8974"
-            }, {
-                officeName: "Room B",
-                buildingId: "4545",
-                timesAvailable: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-                id: "4454"
-            }];
+            // $scope.officesArray = [{
+            //     officeName: "Room A",
+            //     buildingId: "4566",
+            //     timesAvailable: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+            //     id: "8974"
+            // }, {
+            //     officeName: "Room B",
+            //     buildingId: "4545",
+            //     timesAvailable: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+            //     id: "4454"
+            // }];
+
+            // $scope.building = [{
+            //     name:"Any Session Headquarters",
+            //     address:{
+            //         street:"2851 Camino del Rio South",
+            //         city:"San Diego",
+            //         state:"CA",
+            //         zipcode:"92108"
+            //     }
+            // }];
 
 
-
-
-            $scope.testData = {
-                "officeID": 8974,
-                "dateBooked": Date.now,
-                "sessionsRequested": "8",
-                "userID": 1234
-            };
-            $scope.testData.sessionDate;
-            $scope.testData.sessionsRequested;
+            // $scope.sessionBooked = {
+            //     "officeID": 8974,
+            //     "dateBooked": Date.now,
+            //     "sessionsRequested": "8",
+            //     "userID": 1234
+            // // };
+            // $scope.testData.sessionDate;
+            // $scope.testData.sessionsRequested;
 
             $scope.buttonTest = function() {
-                // bookingRest.post().then(function(res) {
-                //     if (res.status === 200) {
-                //         alert("yes!");
-                //     }
+
+                // bookingRest.post($scope.sessionBooked).then(function(response) {
+                // if (response.status === 200) {
+
+                alert("yes! sent data check consolelog");
+                // console.log(response.data);
+                // }else {
+                //     alert("It didnt work!");
+                // }
+
+
                 // });
-                bookingRest.post($scope.testData).then(function(response) {
-                    if (response.status === 200) {
-                        
-                        alert("yes! sent data check consolelog");
-                        console.log(response.data);
-                    }else {
-                        alert("It didnt work!");
-                    }
-                    
-                    
-                });
             };
 
 
 
-            $scope.retrieve = function() {
-                $scope.TestretRieveInfo = bookingRest.retrieveInfo();
-                console.log($scope.TestretRieveInfo);
-            };
+            // $scope.retrieve = function() {
+            //     $scope.TestretRieveInfo = bookingRest.retrieveInfo();
+            //     console.log($scope.TestretRieveInfo);
+            // };
         }
 
     ]);
