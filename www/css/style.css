@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+.booked {
+    color:white;
+    background-color:lightblue;
+    padding:20px;
+    font-family:"Courier New";
+}
+.nonbooked {
+    background-color:coral;
+    padding:40px;
+    font-family:Verdana;
+}

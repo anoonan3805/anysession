@@ -38,16 +38,17 @@ angular.module("RESTServices",[])
     
      //post office reservations-jp
 
-      bookingRest.getBuildingInfo = function(){
-        return $http ({
-            url: URL+"buildings?filter[where][id]=581d0c2a146ddb0ea4263a6c",
-            method: 'GET'
-        });
-    };
+    //   bookingRest.getBuildingInfo = function(){
+    //     return $http ({
+    //         url: URL+"buildings?filter[where][id]=581d0c2a146ddb0ea4263a6c",
+    //         method: 'GET'
+    //     });
+    // };
     
+    //gets reserved sessions 
     bookingRest.getSessions = function(date){
         return $http ({
-            url: URL+"sessions?filter[where][sessionDate]="+date,
+            url: URL+"sessions?filter[where][sessionDate]="+ date,
             method: 'GET'
         });
     };
