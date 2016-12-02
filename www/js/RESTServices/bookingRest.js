@@ -34,7 +34,13 @@ angular.module("RESTServices",[])
         
     };
     
-    
+    //gets offices from backend AN
+    bookingRest.getOffice = function(){
+        return $http ({
+            url: URL+"Offices?filter[fields][officeName]=true",
+            method: 'GET'
+        });
+    };
     
      //post office reservations-jp
 
@@ -46,9 +52,9 @@ angular.module("RESTServices",[])
     // };
     
     //gets reserved sessions 
-    bookingRest.getSessions = function(date){
+    bookingRest.getSessions = function(){
         return $http ({
-            url: URL+"sessions?filter[where][sessionDate]="+ date,
+            url: URL+"sessions?filter[where][sessionDate]="+ "2016-12-01T00:00:00.000Z",
             method: 'GET'
         });
     };

@@ -1,8 +1,8 @@
 angular.module('starterCtrl')
     .controller('bookOfficeCtrl', ["$scope", "$window", "$state", "$ionicHistory", "$rootScope", '$http',
-        'officeBookingService', 'bookingRest',
+        'officeBookingService', 'bookingRest','$filter',
         function($scope, $window, $state, $ionicHistory, $rootScope,
-            $http, officeBookingService,bookingRest) {
+            $http, officeBookingService,bookingRest, $filter) {
                 
             //pulls building info from the backend to display-jp
             // $scope.buildingInfo = {};
@@ -14,18 +14,39 @@ angular.module('starterCtrl')
             // });
             
             //Save the selected date from the datepicker into a variable-jp
-             $scope.myDate = new Date();
-            
-            
-            
-            
-            //push all the hours selected in an array to push to the backend
-            $scope.hours = [];
-            $scope.pushTimes = function(time) {
-                $scope.hours.push(time);
-
+             $scope.dateSelected;
+             var date = $scope.dateSelected;
+            $scope.userID="true";
+         
+            $scope.selectTime = function(){
+                $scope.dateSelected;
+                console.log($scope.dateSelected);
             };
+       
+   
+            //pulling office info from the backend
+            $scope.offices = {};
+            bookingRest.getOffice().then(function(response) {
+                if (response.status === 200) {
+                    $scope.offices = response.data;
+                    console.log($scope.office);
+                }
+            });
             
+            
+            //Function for search button to query for all available times-jp
+            $scope.sessionsArray=[];
+            $scope.searchButton=function(){
+               bookingRest.getSessions()
+              .then(function(response){
+                 if(response.status === 200){
+                     $scope.sessionsArray=response.data; 
+                     console.log($scope.sessionsArray);
+                   }
+                   
+               });
+                
+            };
         }
 
     ]);

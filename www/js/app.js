@@ -79,9 +79,5 @@ angular.module('starter', ['ionic', 'starterCtrl', 'officeBookingService','RESTS
           }
         }
       });
-    
-      
-      
-      
     }
   ]);

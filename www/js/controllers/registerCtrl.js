@@ -27,7 +27,7 @@ angular.module('starterCtrl')
                         alert("That email is already taken. Please enter a different email or login if you are already registered.");
                     }
                     else if (error.status == 500) {
-                        alert("The world has ended, or the server just isn’t online. I'd keep my eyes peeled for zombies!");
+                        alert("Internal Server Error");
                     }
                     return error;
                 });

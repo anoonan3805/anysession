@@ -2,13 +2,6 @@
   <ion-nav-buttons side="left">
   </ion-nav-buttons>
     <ion-content>
-      
-       <datepicker date-month-title="selected year">
-    <input ng-model="date"/>
-</datepicker>
-
-
-      
        <!--<div class="list list-inset">-->
        <!--   <center>-->
        <!--     The following label displays the office name and location-jp-->
@@ -19,9 +12,18 @@
        <!--   </center>-->
        <!-- </div>-->
        
-      <!-- Datepicker for selecting the desired office reservation-jp-->
         
-      <!--button for searching available office hours-jp-->
-      <!--  <center><button class="button button-balanced ion-search" ng-click="searchbutton()">Search</button></center>-->
+     
+         <!--Datepicker for selecting the desired office reservation-jp-->
+      <datepicker date-month-title="selected year" ng-click="selectTime()"> <input ng-model="dateSelected" placeholder="Select session date"> </datepicker> <br>
+         <!--button for searching available office hours-jp-->
+      <center> <button class="button button-balanced ion-search" ng-click="searchButton()">Search</button></center>
+      <!--cards to display offices and available times beneath-jp-->
+      <div class="card" ng-repeat="office in offices">
+         <b>Room {{office.officeName}}</b><br>
+         <button ng-class="{ 'notBooked': session.userID == 'null'}" ng-repeat="session in sessionsArray">{{session.sessionHour}}</button></br>
+      </div>
+      <!--for testing purposes-jp-->
+        {{dateSelected}}
     </ion-content>
 </ion-view>
