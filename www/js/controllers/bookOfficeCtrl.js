@@ -14,15 +14,15 @@ angular.module('starterCtrl')
             // });
             
             //Save the selected date from the datepicker into a variable-jp
-             $scope.dateSelected;
-             var date = $scope.dateSelected;
-            $scope.userID="true";
+            //  $scope.dateSelected;
+            //  var date = $scope.dateSelected;
+          
          
-            $scope.selectTime = function(){
-                $scope.dateSelected;
-                console.log($scope.dateSelected);
-            };
-       
+            // $scope.selectTime = function(){
+            //     $scope.dateSelected;
+            //     console.log($scope.dateSelected);
+            // };
+
    
             //pulling office info from the backend
             $scope.offices = {};
@@ -32,8 +32,7 @@ angular.module('starterCtrl')
                     console.log($scope.office);
                 }
             });
-            
-            
+          
             //Function for search button to query for all available times-jp
             $scope.sessionsArray=[];
             $scope.searchButton=function(){
@@ -47,6 +46,19 @@ angular.module('starterCtrl')
                });
                 
             };
-        }
 
+            // Function called to reserve office from button-jp
+            //need to post an entire object
+            $scope.bookOffice = function (session,sessionID) {  
+               session.userID=$window.localStorage.userId;
+                  bookingRest.bookSession(session,sessionID)
+                     .then(function(response){
+                     //  $window.localStorage.userId=session.userID;
+                     if (response.status === 200) {
+                     //  response.data.userID=$window.localStorage.userId
+                     alert("successful!");
+                     }
+                  });
+            }; 
+        }
     ]);

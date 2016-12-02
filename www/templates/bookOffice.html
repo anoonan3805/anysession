@@ -17,13 +17,13 @@
          <!--Datepicker for selecting the desired office reservation-jp-->
       <datepicker date-month-title="selected year" ng-click="selectTime()"> <input ng-model="dateSelected" placeholder="Select session date"> </datepicker> <br>
          <!--button for searching available office hours-jp-->
-      <center> <button class="button button-balanced ion-search" ng-click="searchButton()">Search</button></center>
+      <center> <button class="button button-balanced ion-search" ng-click="searchButton()"> Search</button></center>
       <!--cards to display offices and available times beneath-jp-->
       <div class="card" ng-repeat="office in offices">
          <b>Room {{office.officeName}}</b><br>
-         <button ng-class="{ 'notBooked': session.userID == 'null'}" ng-repeat="session in sessionsArray">{{session.sessionHour}}</button></br>
+         <button ng-class="{ 'notBooked': session.userID == 'null'}" ng-repeat="session in sessionsArray" ng-click="bookOffice(session,session.id)" ng-click="saveSession(session)">{{session.sessionHour}}</button></br>
       </div>
       <!--for testing purposes-jp-->
-        {{dateSelected}}
+        {{session}}
     </ion-content>
 </ion-view>

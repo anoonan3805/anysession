@@ -24,7 +24,7 @@ angular.module('starter', ['ionic', 'starterCtrl', 'officeBookingService','RESTS
   })
   .config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
-      $urlRouterProvider.otherwise('tabs');
+      $urlRouterProvider.otherwise('login');
       $stateProvider
       
       .state('login',{

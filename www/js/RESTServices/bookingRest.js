@@ -6,6 +6,7 @@ angular.module("RESTServices",[])
 //Service for making office reservations--jp
  var bookingRest = this;
  var URL= "https://anysession-etdebruin10story.c9users.io:8080/api/";
+ var sessionURL = "https://anysession-etdebruin10story.c9users.io:8080/api/Sessions/"
  
  //post office reservations-jp
    bookingRest.post = function(data){
@@ -23,7 +24,6 @@ angular.module("RESTServices",[])
             url: URL,
             method: 'GET'
             });
-        
     };
     
     bookingRest.getTimeSlots = function(){
@@ -58,11 +58,14 @@ angular.module("RESTServices",[])
             method: 'GET'
         });
     };
-                  
-             
-
-
-
-
+    
+    //Puts the usersID to reserve the office-jp
+      bookingRest.bookSession = function(data,sessionID){
+        return $http ({
+            url: sessionURL+"?filter[where][id]="+sessionID,
+            method: 'PUT',
+            data:data
+        });
+    };
   }
  ]);
