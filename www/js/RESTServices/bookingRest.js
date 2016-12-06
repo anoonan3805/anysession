@@ -6,8 +6,8 @@ angular.module("RESTServices",[])
 //Service for making office reservations--jp
  var bookingRest = this;
  var URL= "https://anysession-etdebruin10story.c9users.io:8080/api/";
- var sessionURL = "https://anysession-etdebruin10story.c9users.io:8080/api/Sessions/"
- 
+ var sessionURL = "https://anysession-etdebruin10story.c9users.io:8080/api/Sessions/";
+ var officeURL = "https://anysession-etdebruin10story.c9users.io:8080/api/Offices/getSessions";
  //post office reservations-jp
    bookingRest.post = function(data){
         return $http ({
@@ -42,19 +42,46 @@ angular.module("RESTServices",[])
         });
     };
     
+    //gets user's name
+    bookingRest.getName = function(userId){
+        return $http ({
+            url: URL+"Doctors?filter[where][id]=" + $window.localStorage.userId,
+            method: 'GET'
+            });
+    };
+    
      //post office reservations-jp
 
-    //   bookingRest.getBuildingInfo = function(){
-    //     return $http ({
-    //         url: URL+"buildings?filter[where][id]=581d0c2a146ddb0ea4263a6c",
-    //         method: 'GET'
-    //     });
-    // };
-    
-    //gets reserved sessions 
-    bookingRest.getSessions = function(){
+      bookingRest.getBuildingInfo = function(){
         return $http ({
-            url: URL+"sessions?filter[where][sessionDate]="+ "2016-12-01T00:00:00.000Z",
+            url: URL+"buildings",
+            method: 'GET'
+        });
+    };
+    
+    // gets reserved sessions 
+    bookingRest.getSessions = function(dateSelected){
+        return $http ({
+            url: URL+"sessions?filter[where][sessionDate]="+ dateSelected,
+            method: 'GET'
+        });
+    };
+    
+       bookingRest.getSessions2 = function(dateSelected){
+        return $http ({
+            url: officeURL+"?filter[where][sessionDate]="+ dateSelected,
+            method: 'GET'
+        });
+    };
+    
+    
+    
+    
+    
+    //gets sessions for therapist landing AN
+    bookingRest.getApptsToday = function(date){
+        return $http ({
+            url: sessionURL+"?filter[where][userID]="+ $window.localStorage.userId + "&filter[where][sessionDate]="+ date,
             method: 'GET'
         });
     };
@@ -66,6 +93,18 @@ angular.module("RESTServices",[])
             method: 'PUT',
             data:data
         });
+   
+   
+    //  bookingRest.getSessions2 = function(dateSelected){
+    //     return $http ({
+    //         url: officeURL+"sessions?filter[where][sessionDate]="+ dateSelected,
+    //         method: 'GET'
+    //     });
+    // };
+    
+   
+   
+   
     };
   }
  ]);

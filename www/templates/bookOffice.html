@@ -2,28 +2,24 @@
   <ion-nav-buttons side="left">
   </ion-nav-buttons>
     <ion-content>
-       <!--<div class="list list-inset">-->
-       <!--   <center>-->
+       <div class="list list-inset">
+          <center>
        <!--     The following label displays the office name and location-jp-->
-       <!--     <label class="item"> <b>Office Location</b><br> {{building[0].buildingName}}<br>-->
-       <!--     {{building[0].address.street}},<br>-->
-       <!--     {{building[0].address.city}}, {{building[0].address.state}}, {{building[0].address.zipcode}}-->
-       <!--     </label>-->
-       <!--   </center>-->
-       <!-- </div>-->
-       
-        
-     
+            <label class="item"> <b>Office Location</b><br> {{building[0].buildingName}}<br>
+            </label>
+          </center>
+        </div>
          <!--Datepicker for selecting the desired office reservation-jp-->
-      <datepicker date-month-title="selected year" ng-click="selectTime()"> <input ng-model="dateSelected" placeholder="Select session date"> </datepicker> <br>
+         <center>
+      <datepicker date-month-title="selected year" ng-click="selectTime()" date-format="yyyy-MM-dd"> <input ng-model="dateSelected" placeholder="Select session date"> </datepicker> <br>
+        <br>
          <!--button for searching available office hours-jp-->
-      <center> <button class="button button-balanced ion-search" ng-click="searchButton()"> Search</button></center>
+       <button class="button button-balanced ion-search" ng-click="searchButton(dateSelected)"> Search</button></center>
       <!--cards to display offices and available times beneath-jp-->
       <div class="card" ng-repeat="office in offices">
          <b>Room {{office.officeName}}</b><br>
          <button ng-class="{ 'notBooked': session.userID == 'null'}" ng-repeat="session in sessionsArray" ng-click="bookOffice(session,session.id)" ng-click="saveSession(session)">{{session.sessionHour}}</button></br>
       </div>
       <!--for testing purposes-jp-->
-        {{session}}
     </ion-content>
 </ion-view>
