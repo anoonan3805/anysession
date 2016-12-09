@@ -1,25 +1,46 @@
 <ion-view view-title="Book Office" hide-back-button="false">
-  <ion-nav-buttons side="left">
-  </ion-nav-buttons>
-    <ion-content>
-       <div class="list list-inset">
-          <center>
-       <!--     The following label displays the office name and location-jp-->
-            <label class="item"> <b>Office Location</b><br> {{building[0].buildingName}}<br>
-            </label>
-          </center>
-        </div>
-         <!--Datepicker for selecting the desired office reservation-jp-->
-         <center>
-      <datepicker date-month-title="selected year" ng-click="selectTime()" date-format="yyyy-MM-dd"> <input ng-model="dateSelected" placeholder="Select session date"> </datepicker> <br>
-        <br>
-         <!--button for searching available office hours-jp-->
-       <button class="button button-balanced ion-search" ng-click="searchButton(dateSelected)"> Search</button></center>
-      <!--cards to display offices and available times beneath-jp-->
-      <div class="card" ng-repeat="office in offices">
-         <b>Room {{office.officeName}}</b><br>
-         <button ng-class="{ 'notBooked': session.userID == 'null'}" ng-repeat="session in sessionsArray" ng-click="bookOffice(session,session.id)" ng-click="saveSession(session)">{{session.sessionHour}}</button></br>
-      </div>
-      <!--for testing purposes-jp-->
-    </ion-content>
+	<ion-nav-buttons side="left">
+	</ion-nav-buttons>
+	<ion-content>
+		<div class="list list-inset">
+			<center>
+				<!--     The following label displays the office name and location-jp-->
+				<label class="item">
+					<b>Office Location</b>
+					<br> 
+					{{building[0].buildingName}}
+					<br>
+			</label>
+			</center>
+		</div>
+		<!--Datepicker for selecting the desired office reservation-jp-->
+		<center>
+			<datepicker date-format="mediumDate" date-month-title="selected year" ng-click="selectTime()">
+				<input ng-model="dateSelected" placeholder="Select session date">
+			</datepicker>
+			<br>
+			<br>
+			<!--button for searching available office hours-jp-->
+			<button class="button button-balanced ion-search" ng-click="searchButton(dateSelected)"> 
+				Search
+			</button>
+		</center>
+		<!--cards to display offices and available times beneath-jp-->
+		<div class ="card" ng-repeat="office in officesArray">
+			<div ng-if="office.sessions">
+				
+				    <b>Office {{office.officeName}}</b>
+				<div ng-repeat="session in office.sessions">
+				<button ng-class="{ 'button button-small button-balanced': session.userID == 'null', 'button button-small button-stable':session.userID !== 'null'}" ng-click="bookOffice(session,session.id)">
+					{{session.sessionDate | date: 'h:mm a' : 'UTC'}}
+				</button>
+				</div>
+			</div>
+			<div ng-if="!office.sessions">
+				<b>Office {{office.officeName}}</b> has no available sessions.
+			</div>
+		</div>
+		
+
+	</ion-content>
 </ion-view>

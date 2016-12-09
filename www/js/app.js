@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'starterCtrl', 'officeBookingService','RESTServices','720kb.datepicker','RESTservicesuser'])
+angular.module('starter', ['ionic', 'starterCtrl', 'officeBookingService', 'RESTServices', '720kb.datepicker', 'RESTservicesuser'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -26,27 +26,27 @@ angular.module('starter', ['ionic', 'starterCtrl', 'officeBookingService','RESTS
     function($stateProvider, $urlRouterProvider) {
       $urlRouterProvider.otherwise('login');
       $stateProvider
-      
-      .state('login',{
-      url: '/login',
-      controller: 'loginCtrl',
-      templateUrl: 'templates/login.html'
+
+        .state('login', {
+        url: '/login',
+        controller: 'loginCtrl',
+        templateUrl: 'templates/login.html'
       })
-      
+
       .state('register', {
-      url: '/register',
-      controller: 'registerCtrl',
-      templateUrl: 'templates/register.html'
-    })
-      
-      
+        url: '/register',
+        controller: 'registerCtrl',
+        templateUrl: 'templates/register.html'
+      })
+
+
       //Therapist
-        .state('tabs', {
+      .state('tabs', {
         // abstract:true,
         url: '/tabs',
         templateUrl: 'templates/tabs.html'
       })
-        
+
       .state('tabs.therapistLanding', {
         url: '/therapistLanding',
         cache: false,
@@ -54,11 +54,22 @@ angular.module('starter', ['ionic', 'starterCtrl', 'officeBookingService','RESTS
           'therapistLanding': {
             templateUrl: 'templates/therapistLanding.html',
             controller: 'therapistLandingCtrl'
-          }
+          },
+        },
+        resolve: {
+          loadSessions: ['bookingRest',
+            function(bookingRest) {
+              return getSessions();
+              function getSessions() {
+                var date = new Date();
+                return bookingRest.getApptsToday(date);
+              }
+            }
+          ]
         }
       })
-      
-        .state('tabs.bookOffice', {
+
+      .state('tabs.bookOffice', {
         url: '/bookOffice',
         cache: false,
         views: {
@@ -68,7 +79,7 @@ angular.module('starter', ['ionic', 'starterCtrl', 'officeBookingService','RESTS
           }
         }
       })
-      
+
       .state('tabs.confirmation', {
         url: '/confirmation',
         cache: false,

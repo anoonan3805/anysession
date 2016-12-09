@@ -1,12 +1,16 @@
 <ion-view view-title="Home" hide-back-button="false">
           <ion-nav-buttons side="right">
+              <button class="button button-clear" ng-click=logOut()>
+        Logout
+        <i class="icon ion-log-out"></i>
+         </button>
          </ion-nav-buttons>
 
     <ion-content class="has-footer">
         <center><h1>Welcome, {{user[0].firstName}}!</h1>
         <h3>Here are your appointments for today,<br> {{date | date:'fullDate'}}:</h3>
-        <div class="list list-inset" ng-repeat="appointment in appointments">{{appointment.sessionHour}}
-            <!--<div class="item"><b>9:00am Office A</b> Ben Patrick </div>-->
+        <div class="list list-inset">
+            <div class="item" ng-repeat="appointment in appointments"><b>{{appointment.sessionHour}}</b></div>
             <!--<div class="item"><b>11:30am Office A</b> Mark Maxwell</div>-->
             <!--<div class="item"><b>1:30pm Office B</b> Renee Lewis</div>-->
             <!--<div class="item"><b>3:00pm Office B</b> Etienne de Bruin</div>-->
